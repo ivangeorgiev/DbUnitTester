@@ -1,0 +1,32 @@
+{
+	"executor": {
+		"type": "SqlDump",
+	},
+	"testcase": {
+		name: "IRS",
+		"testcases": [
+			{
+				name: "Staging",
+				"sources": [
+					{ "name": "expect", "source": "fix_s_mas_irs"},
+					{ "name": "actual", "source": "s_mas_irs", "filter": "deal_id = 'MMX_1493372_120425_1493525'" }
+				],
+				"validators": [
+					{
+						"name": "CountMatch",
+						"type": "CountMatch",
+						"expect": "expect",
+						"actual": "actual"
+					},
+					{
+						"name": "DataMatch",
+						"type": "ColByColDataMatch",
+						"expect": "expect",
+						"actual": "actual",
+						"columns": "LOAD_ID,SOURCE_SYS_ID,MD_ID,tradeCurrency,extRef,prodType,productId,MANDANT_ID,BookCode,CounterPartyCode,CollateralType,settlementCurrency,prodLegRateIndex,prodLegReceiveDayCount,cfAmountCurrency,DEAL_ID,tradeDate,settlementDate,MasIdentifier,CALYPSO_STATUS,MurexBaseIdentifier,TRADED_CCY,cfStartDate,cfEndDate,cfNotional,cfAmountQuantity,cfDate,cfType,cfXsiType,cfRate,prodLegOptionType,prodLegOptionTypeCapStrike,prodLegOptionTypeFloorStrike,prodLegCouponFrequency,prodLegCouponPaymentAtEnd,prodLegNotionalQuantity,prodLegStartDate,prodLegEndDate,prodLegSpread,cfResetDate,SK_ACCT_ID,SK_CAF_GL_PRODUCT_ID,SK_PARTY2_ID,SK_PARTY_ID,SK_PRODUCT_ID",
+					}
+				]
+			}
+		]
+	}
+}
