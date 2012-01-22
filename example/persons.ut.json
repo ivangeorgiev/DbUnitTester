@@ -1,6 +1,6 @@
 {
 	"executor": {
-		"type": "Dump",
+		"type": "SqlDump",
 	},
 	"testcase": {
 		name: "MyETLStaging",

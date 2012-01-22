@@ -1,0 +1,9 @@
+
+* Support for StartUps (type of Action)
+* Support for TearDowns (type of Action)
+* Support for Operations (type of Action)
+* Custom SQL Action
+* Save Results Action - create table, insert data
+* Drop Table Action (if exists)
+* Exector - against database connection
+* Save execution log against connection

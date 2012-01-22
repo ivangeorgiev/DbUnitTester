@@ -105,5 +105,6 @@ Name it xxxExecutor.
 For example. Dump executor class is named DumpExecutor. Sql generator class is 
 named SqlDumpExecutor.
 
+2. Create custom validators
 
 
