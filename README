@@ -1,0 +1,109 @@
+DbUnitTester Database Unit Test Execution Tool
+==============================================
+
+Copyright (c) 2012 Ivan Georgiev.
+
+All rights reserved.
+
+Prerequisites
+-------------
+
+Bul7Lib - available as separate jar download.
+
+Getting Started
+---------------
+
+1. Installation
+
+You need to download following packages:
+
+DbUnitTester.jar
+lib/Bul7Lib.jar
+
+Make sure you place them in the directories denoted above.
+
+2. Prepare Test Definition.
+
+The definition for tests is stored in json file.
+
+In this exacmple we are creating unit tests for database procedure that loads
+the PERSONS table.
+
+---------------- persons.ut.json -------------------
+
+{
+	"executor": {
+		"type": "SqlDump",
+	},
+	"testcase": {
+		name: "MyETLStaging",
+		"testcases": [
+			{
+				name: "PersonsStaging",
+				"sources": [
+					{ "name": "expect", "source": "fix_persons"},
+					{ "name": "actual", "source": "persons", "filter": "person_id = 32" }
+				],
+				"validators": [
+					{
+						"name": "CountMatch",
+						"type": "CountMatch",
+						"expect": "expect",
+						"actual": "actual"
+					},
+					{
+						"name": "DataMatch",
+						"type": "ColByColDataMatch",
+						"expect": "expect",
+						"actual": "actual",
+						"columns": "person_id,first_name,last_name",
+					}
+				]
+			}
+		]
+	}
+}
+
+----------------------------------------------------
+
+4. Dump interpreted definition
+
+Modify the persons.ut.java file. Modify the "executor" definition:
+
+   "type": "Dump"
+
+Execute following command:
+   java -jar DbUnitTester.jar persons.ut.json
+
+This will display the test definiton loaded by the tester.
+   
+This technique is useful for debugging your definition.
+
+3. Run the test
+
+Make sure you set the "executor" type back to the value above:
+
+   "type": "SqlDump"
+
+Execute the following command:
+
+java -jar DbUnitTester.jar persons.ut.json > MyETLStaging_UnitTest.sql
+
+This will produce a file containing SQL statments that carry out the unit test 
+cases described in your file.
+
+Extending DbUnitTester
+----------------------
+1. Create custom executor. 
+
+We showed you how you can use different executors to generate SQL and dump the 
+test definition.
+
+You can create custom Java class that implements the extends the Executor class.
+Name it xxxExecutor.
+
+For example. Dump executor class is named DumpExecutor. Sql generator class is 
+named SqlDumpExecutor.
+
+
+

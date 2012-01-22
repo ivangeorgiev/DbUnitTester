@@ -1,0 +1,32 @@
+{
+	"executor": {
+		"type": "Dump",
+	},
+	"testcase": {
+		name: "MyETLStaging",
+		"testcases": [
+			{
+				name: "PersonsStaging",
+				"sources": [
+					{ "name": "expect", "source": "fix_persons"},
+					{ "name": "actual", "source": "persons", "filter": "person_id = 32" }
+				],
+				"validators": [
+					{
+						"name": "CountMatch",
+						"type": "CountMatch",
+						"expect": "expect",
+						"actual": "actual"
+					},
+					{
+						"name": "DataMatch",
+						"type": "ColByColDataMatch",
+						"expect": "expect",
+						"actual": "actual",
+						"columns": "person_id,first_name,last_name",
+					}
+				]
+			}
+		]
+	}
+}
