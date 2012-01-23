@@ -5,5 +5,5 @@
 * Custom SQL Action
 * Save Results Action - create table, insert data
 * Drop Table Action (if exists)
-* Exector - against database connection
+V Exector - against database connection - Done (SqlExecutor)
 * Save execution log against connection
