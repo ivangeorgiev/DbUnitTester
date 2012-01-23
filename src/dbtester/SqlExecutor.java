@@ -38,6 +38,27 @@ public class SqlExecutor extends Executor {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    @Override
+    protected void afterExecute(TestCase tc) {
+        super.afterExecute(tc);
+        if (statement != null) {
+            try { 
+                statement.close();
+            } catch (Exception e) {
+            } finally {
+                statement = null;
+            }
+        }
+        if (conn != null) {
+            try { 
+                conn.close();
+            } catch (Exception e) {
+            } finally {
+                conn = null;
+            }
+        }
+    }
     
     @Override
     protected void doExecute(Validator v) {
