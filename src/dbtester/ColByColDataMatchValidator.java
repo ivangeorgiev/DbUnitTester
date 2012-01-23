@@ -107,6 +107,7 @@ public class ColByColDataMatchValidator extends Validator {
 "         " + expectColSrc + "\n" +
 "      )\n" +
 "   ) d\n" +
+"GROUP BY message\n" +
 "HAVING COUNT(*) > 0\n"
         ;
     }
