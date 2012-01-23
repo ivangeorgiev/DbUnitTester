@@ -9,7 +9,7 @@
 				name: "PersonsStaging",
 				"sources": [
 					{ "name": "expect", "source": "fix_persons"},
-					{ "name": "actual", "source": "persons", "filter": "person_id = 32" }
+					{ "name": "actual", "source": "persons", "filter": "person_id = 1" }
 				],
 				"validators": [
 					{
