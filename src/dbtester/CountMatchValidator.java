@@ -49,7 +49,7 @@ public class CountMatchValidator extends Validator {
         
         String sql = 
 "SELECT " + "\n" +
-"   CAST('Expected ' || TRIM(e.num_rows) || ' rows, actual ' || TRIM(a.num_rows) AS VARCHAR(255)) AS message" + "\n" +
+"   CAST('Expected ' || TRIM(CAST(e.num_rows AS VARCHAR(32))) || ' rows, actual ' || TRIM(CAST(a.num_rows AS VARCHAR(32))) AS VARCHAR(255)) AS message" + "\n" +
 "FROM " + "\n" +
 "   (SELECT COUNT(*) AS num_rows FROM " + expectSource + ") e" + "\n" +
 "JOIN" + "\n" +
