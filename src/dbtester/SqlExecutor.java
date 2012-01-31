@@ -67,10 +67,11 @@ public class SqlExecutor extends Executor {
             stmt = getStatement();
             ResultSet rs = stmt.executeQuery(v.getSql());
             while (rs.next()) {
-                Logger.getLogger(SqlExecutor.class.getName()).log(Level.SEVERE, String.format("{%s} Failed: %s", v.getName(), rs.getString("message")));
+                System.err.println(String.format("{%s} Failed: %s", v.getName(), rs.getString("message")));
             }
+            rs.close();
         } catch (SQLException ex) {
-            Logger.getLogger(SqlExecutor.class.getName()).log(Level.SEVERE, String.format("{%s} Failed with exception: %s", v.getName(), ex.getMessage()));
+            System.err.println(String.format("{%s} Failed with exception: %s", v.getName(), ex.getMessage()));
         }
     }
     
@@ -80,7 +81,7 @@ public class SqlExecutor extends Executor {
             try {
                 Class.forName(driver);
             } catch (ClassNotFoundException cnfe) {
-                throw new SQLException("Driver not found.");
+                throw new SQLException(String.format("Driver '%s' not found.", driver));
             }
         }
         if (conn == null) {
